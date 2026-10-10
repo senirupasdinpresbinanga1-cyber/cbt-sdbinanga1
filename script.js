@@ -1,5 +1,5 @@
 // ISI DENGAN URL APPS SCRIPT SPREADSHEET HASIL DEPLOYMENT ANDA
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwOR-vcaw0KDbULZ9Czd_WAnDsT9dkN-d-tbHxHgv4nDrTM0Jhruj-23kTyBgWPj1yg/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxqxbjUV1QDfMTn-HKfsgMUnWGmtFW1nvDyBXuFAvi21eTRZFc-7Mct-Efju_rxbf0-/exec";
 
 // Database Siswa Kelas 6A dan 6B
 const validStudents = [

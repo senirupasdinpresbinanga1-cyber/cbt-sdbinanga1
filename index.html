@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SD INPRES BINANGA 1 - UJIAN SEKOLAH CBT 2026</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <!-- Chart.js Library untuk Grafik Stacked Area -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; }
     body { background-color: #f2f4f8; color: #333; min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
@@ -30,7 +32,6 @@
     .input-group input { width: 100%; padding: 12px 15px 12px 42px; border: 1px solid #dcdcdc; border-radius: 8px; font-size: 14px; outline: none; transition: 0.3s; }
     .input-group input:focus { border-color: #1a73e8; box-shadow: 0 0 0 3px rgba(26,115,232,0.15); }
 
-    /* Tombol Pilihan Kelas */
     .kelas-options { display: flex; gap: 10px; margin-bottom: 18px; }
     .btn-kelas { flex: 1; padding: 12px; border: 2px solid #dcdcdc; background: #f8f9fa; border-radius: 8px; font-weight: 700; font-size: 15px; cursor: pointer; color: #555; transition: 0.2s; text-align: center; }
     .btn-kelas:hover { border-color: #1677ff; color: #1677ff; }
@@ -50,16 +51,17 @@
     .option-item input { margin-right: 12px; transform: scale(1.2); }
     textarea { width: 100%; height: 130px; padding: 12px; border: 1px solid #ccc; border-radius: 8px; resize: vertical; font-size: 14px; }
 
-    .number-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-height: 350px; overflow-y: auto; padding-right: 5px; }
+    .number-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-height: 380px; overflow-y: auto; padding-right: 5px; }
     .num-btn { padding: 8px; text-align: center; border: 1px solid #ccc; border-radius: 6px; background: white; cursor: pointer; font-weight: 700; font-size: 12px; }
     .num-btn.active { background: #1677ff; color: white; border-color: #1677ff; }
     .num-btn.answered { background: #52c41a; color: white; border-color: #52c41a; }
 
-    .timer-box { background: #fff1f0; border: 1px solid #ffa39e; color: #cf1322; font-size: 22px; font-weight: 800; text-align: center; padding: 10px; border-radius: 8px; margin-bottom: 15px; }
-
     .btn-action { padding: 10px 20px; border-radius: 6px; border: none; font-weight: 700; cursor: pointer; font-size: 14px; }
     .btn-secondary { background: #6c757d; color: white; }
     .btn-success { background: #52c41a; color: white; width: 100%; }
+
+    .chart-box { margin-top: 25px; padding: 20px; background: #fafafa; border: 1px solid #e8e8e8; border-radius: 10px; }
+    .chart-container { position: relative; height: 320px; width: 100%; margin-top: 15px; }
 
     footer { text-align: center; padding: 20px; font-size: 12px; color: #888; }
     .hidden { display: none !important; }
@@ -70,7 +72,7 @@
   <div class="header-bg">
     <div class="header-content">
       <div class="logo-tutwuri">
-        <img src="https://cdn.pixabay.com/photo/2022/05/10/10/21/tut-wuri-handayani-7186716_960_720.png" alt="Tut Wuri Handayani">
+        <img src="https://i.imgur.com/zxHVrUp.png" alt="Logo">
       </div>
       <div class="school-title">
         <h1>SD INPRES BINANGA 1</h1>
@@ -150,7 +152,6 @@
 
         <div>
           <div class="card">
-            <div class="timer-box" id="timer-display">120:00</div>
             <h4 style="margin-bottom: 12px; font-size: 14px; text-align: center;">Navigasi Soal (160)</h4>
             <div class="number-grid" id="number-grid"></div>
             <button id="btn-finish" class="btn-action btn-success" style="margin-top: 20px;">Selesai & Kirim Ujian</button>
@@ -169,10 +170,19 @@
         <p><strong>NISN:</strong> <span id="res-nisn"></span></p>
         <p><strong>Kelas:</strong> <span id="res-kelas"></span></p>
         <p><strong>Skor Pilihan Ganda:</strong> <span id="res-score" style="font-weight:bold; font-size:18px; color:#389e0d;"></span> / 240</p>
-        <p><strong>Status Pengiriman:</strong> <span id="res-status" style="color:#1677ff; font-weight:bold;">Mengirim data ke Google Drive...</span></p>
+        <p><strong>Status Pengiriman:</strong> <span id="res-status" style="color:#1677ff; font-weight:bold;">Mengirim data ke Spreadsheet...</span></p>
       </div>
 
-      <button onclick="location.reload()" class="btn-login" style="margin-top: 20px; width: auto; padding: 10px 25px;">Selesai</button>
+      <!-- GRAFIK ANALISIS STACKED AREA -->
+      <div class="chart-box">
+        <h4 style="text-align: center; color: #333;">Grafik Analisis Jawaban Pilihan Ganda</h4>
+        <p style="text-align: center; font-size: 12px; color: #777;">Grafik akumulasi bertumpuk: Merah (Salah/Kosong) di bawah & Biru (Benar) bertumpuk di atas.</p>
+        <div class="chart-container">
+          <canvas id="resultChart"></canvas>
+        </div>
+      </div>
+
+      <button onclick="location.reload()" class="btn-login" style="margin-top: 25px; width: auto; padding: 10px 25px;">Selesai</button>
     </div>
 
   </div>

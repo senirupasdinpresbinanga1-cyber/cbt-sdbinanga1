@@ -51,12 +51,6 @@
     .chart-container { position: relative; height: 320px; width: 100%; margin-top: 15px; }
     footer { text-align: center; padding: 20px; font-size: 12px; color: #888; }
     .hidden { display: none !important; }
-    
-    /* Styling khusus Passing Grade Screen */
-    .passing-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 13px; }
-    .passing-table th, .passing-table td { border: 1px solid #dcdcdc; padding: 10px; text-align: center; }
-    .passing-table th { background: #1677ff; color: white; }
-    .passing-table tr:nth-child(even) { background: #f9f9f9; }
   </style>
 </head>
 <body>
@@ -70,19 +64,17 @@
     </div>
   </div>
   <div class="main-container">
-    
-    <!-- LOGIN SCREEN -->
     <div id="login-screen" class="card login-card">
       <div class="login-top-info">LUPA USERNAME / PASSWORD ? : HUBUNGI <span>ADMIN SEKOLAH</span></div>
       <div class="login-title">
         <h2>Selamat Datang</h2>
-        <p>Silakan masukkan NISN / Email Admin dan pilih kelas Anda</p>
+        <p>Silakan masukkan NISN dan pilih kelas Anda</p>
       </div>
-      <div id="login-error" class="error-msg">Username / Email atau Pilihan Kelas Salah!</div>
+      <div id="login-error" class="error-msg">Username (NISN) atau Pilihan Kelas Salah!</div>
       <form id="login-form">
         <div class="input-group">
           <i class="fa-solid fa-user icon-left"></i>
-          <input type="text" id="nisn" placeholder="Username (NISN) / Email" required autocomplete="off">
+          <input type="text" id="nisn" placeholder="Username (NISN)" required autocomplete="off">
         </div>
         <label style="font-size:12px; font-weight:bold; color:#555; display:block; margin-bottom:6px;">Pilih Kelas:</label>
         <div class="kelas-options">
@@ -92,47 +84,6 @@
         <button type="submit" class="btn-login">Login</button>
       </form>
     </div>
-
-    <!-- PASSING GRADE SCREEN (Khusus mountkareumbi@gmail.com) -->
-    <div id="passing-grade-screen" class="card hidden">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h3 style="color: #1677ff;"><i class="fa-solid fa-chart-line"></i> Dashboard Passing Grade & Rekap Nilai Siswa</h3>
-        <button onclick="location.reload()" class="btn-action btn-secondary" style="font-size: 12px; padding: 6px 12px;">Keluar / Logout</button>
-      </div>
-      <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Akun Administrator terdeteksi (<strong>mountkareumbi@gmail.com</strong>). Berikut adalah rekapitulasi data passing grade dan status ujian seluruh siswa:</p>
-      
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px;">
-        <div style="background: #e6f4ff; padding: 15px; border-radius: 8px; border-left: 4px solid #1677ff;">
-          <h4 style="font-size: 12px; color: #555;">Total Siswa Terdaftar</h4>
-          <p id="pg-total-siswa" style="font-size: 22px; font-weight: bold; color: #1677ff; margin-top: 5px;">52</p>
-        </div>
-        <div style="background: #f6ffed; padding: 15px; border-radius: 8px; border-left: 4px solid #52c41a;">
-          <h4 style="font-size: 12px; color: #555;">Standar Passing Grade</h4>
-          <p style="font-size: 22px; font-weight: bold; color: #52c41a; margin-top: 5px;">75.0 (Skor Min 180)</p>
-        </div>
-      </div>
-
-      <div style="overflow-x: auto;">
-        <table class="passing-table">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>NISN</th>
-              <th>Nama Siswa</th>
-              <th>Kelas</th>
-              <th>Skor PG (Max 240)</th>
-              <th>Persentase (%)</th>
-              <th>Status Passing Grade</th>
-            </tr>
-          </thead>
-          <tbody id="passing-table-body">
-            <!-- Data dirender otomatis via JS -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- CONFIRM SCREEN -->
     <div id="confirm-screen" class="card login-card hidden">
       <h3 style="margin-bottom: 15px; text-align: center; color: #1677ff;">Konfirmasi Data Peserta</h3>
       <div style="background: #e6f4ff; padding: 15px; border-radius: 8px; margin-bottom: 20px; line-height: 1.8; font-size: 14px;">
@@ -146,8 +97,6 @@
         <button type="button" id="btn-start-exam" class="btn-login" style="flex:2; margin:0;">Mulai Ujian</button>
       </div>
     </div>
-
-    <!-- EXAM SCREEN -->
     <div id="exam-screen" class="hidden">
       <div class="quiz-layout">
         <div class="card">
@@ -176,8 +125,6 @@
         </div>
       </div>
     </div>
-
-    <!-- RESULT SCREEN -->
     <div id="result-screen" class="card hidden">
       <h3 style="color: #52c41a;">Ujian Selesai!</h3>
       <p style="margin-top: 8px; font-size: 14px; color: #666;">Nilai dan jawaban Anda telah dikirimkan ke server sekolah.</p>
@@ -195,7 +142,6 @@
       </div>
       <button onclick="location.reload()" class="btn-login" style="margin-top: 25px; width: auto; padding: 10px 25px;">Selesai</button>
     </div>
-
   </div>
   <footer>
     <p>© Copyright 2026, CBT SD Inpres Binanga 1 Mamuju</p>

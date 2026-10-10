@@ -1,6 +1,6 @@
 // ISI DENGAN URL APPS SCRIPT SPREADSHEET HASIL DEPLOYMENT ANDA
 // GANTI dengan URL Web App Google Apps Script yang berakhiran /exec
-const GOOGLE_SCRIPT_URL = "TEMPEL_URL_WEB_APP_GOOGLE_APPS_SCRIPT_DI_SINI";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxoGphHCEln-OOJRenUAbXW1R1AoUNeVELv52WLlsTw6IFXpU1cfXKFTwuD32Vgs0PV/exec";
 
 // Database Siswa Kelas 6A dan 6B
 const validStudents = [

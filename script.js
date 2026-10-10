@@ -1,5 +1,5 @@
 // ISI DENGAN URL APPS SCRIPT WEB APP ANDA YANG BENAR
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxwb9TYxeyDL__EbY5Ahz6zxp_7EvBJ7eQ2YbrBEmVDC0kL7I-G-ZZfPZWh0_pAEEh1/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyreCihaaImDXUSIc2axAfu1x_NP-U225QFM7GgnGyby9BJWOzl5q1d3ycs1MQWR3Zp/exec";
 
 const validStudents = [
   { nisn: "3140466270", nama: "AIRIN RAHMI ANDINI", kelas: "6B" },
@@ -268,7 +268,6 @@ document.getElementById("btn-start-exam").addEventListener("click", function() {
   document.getElementById("confirm-screen").classList.add("hidden");
   document.getElementById("exam-screen").classList.remove("hidden");
 
-  // Kirim data langsung ke Apps Script saat mulai ujian
   kirimProgressKeServer(false);
 
   renderNumberGrid();
@@ -376,7 +375,6 @@ function hitungSkorSementara() {
   return pgScore;
 }
 
-// FIX UTAMA: Menggunakan Image Beacon / POST fallback agar tembus CORS Apps Script
 function kirimProgressKeServer(isSelesai) {
   if (!currentUser) return;
 
@@ -397,7 +395,6 @@ function kirimProgressKeServer(isSelesai) {
     selesai: isSelesai
   };
 
-  // Menggunakan fetch POST dengan mode no-cors
   fetch(GOOGLE_SCRIPT_URL, {
     method: "POST",
     mode: "no-cors",

@@ -1,5 +1,5 @@
-// ISI DENGAN URL APPS SCRIPT WEB APP ANDA YANG BENAR
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxtK7iS6tlAa-OcYXmKl1cJk-ra00cqxvTPuIORtDMdfLcFJcqrjKcwGg4tA8YRzb9LOQ/exec";
+// URL APPS SCRIPT WEB APP
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyEMw571QJcuFxA6cCxbPOydKqfWwTmMAuv3YUTIXUxk5tT4rYdCidmihIj4WTdFhWnmw/exec";
 
 const validStudents = [
   { nisn: "3140466270", nama: "AIRIN RAHMI ANDINI", kelas: "6B" },
@@ -155,7 +155,7 @@ const allQuestions = [
   { id: 96, mapel: "IPAS", type: "essay", text: "Jelaskan perjalanan makanan dari mulut hingga menjadi sisa pembuangan, sebutkan organ yang dilalui!" },
   { id: 97, mapel: "IPAS", type: "essay", text: "Ani selalu sarapan minuman manis. Analisislah dampaknya bagi tubuh dan susunlah menu sarapan bergizi seimbang!" },
   { id: 98, mapel: "IPAS", type: "essay", text: "Pada rantai makanan padi, tikus, ular, elang; jika elang sering diburu manusia hingga habis, jelaskan dampaknya!" },
-  { id: 99, mapel: "IPAS", type: "essay", text: "Sebutkan tiga contoh perubahan energi yang teradi di rumah dan jelaskan!" },
+  { id: 99, mapel: "IPAS", type: "essay", text: "Sebutkan tiga contoh perubahan energi yang terjadi di rumah dan jelaskan!" },
   { id: 100, mapel: "IPAS", type: "essay", text: "Sungai dekat desa menjadi keruh dan berbau karena sampah. Berikan tiga solusi yang dapat dilakukan warga!" },
   { id: 101, mapel: "PJOK", type: "pg", text: "Berikut yang termasuk permainan bola besar adalah ....", options: ["A. Kasti", "B. Bulu tangkis", "C. Sepak bola", "D. Tenis meja"], answer: 2 },
   { id: 102, mapel: "PJOK", type: "pg", text: "Teknik dasar mengoper bola pendek dalam sepak bola menggunakan ....", options: ["A. Kaki bagian dalam", "B. Ujung jari kaki", "C. Tumit", "D. Lutut"], answer: 0 },
@@ -375,7 +375,6 @@ function hitungSkorSementara() {
   return pgScore;
 }
 
-// MENGGUNAKAN MODE NO-CORS DENGAN TEXT/PLAIN AGAR LOLOS DARI BLOKIR BROWSER
 function kirimProgressKeServer(isSelesai) {
   if (!currentUser) return;
 

@@ -1,9 +1,7 @@
-// ISI DENGAN URL APPS SCRIPT SPREADSHEET HASIL DEPLOYMENT ANDA
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwu2b-Fgb2WOPCpZvlmca-nLYzv6Kf7g1oq5A5UtC-yG9L_7uvjdIP3RJ6kQjKnNx1O/exec";
+// ISI DENGAN URL APPS SCRIPT WEB APP ANDA YANG BENAR
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyreCihaaImDXUSIc2axAfu1x_NP-U225QFM7GgnGyby9BJWOzl5q1d3ycs1MQWR3Zp/exec";
 
-// Database Siswa Kelas 6A dan 6B
 const validStudents = [
-  // KELAS 6B
   { nisn: "3140466270", nama: "AIRIN RAHMI ANDINI", kelas: "6B" },
   { nisn: "3144872142", nama: "ALKAUSAR", kelas: "6B" },
   { nisn: "3145816553", nama: "ANINDYA JINAN RISQI", kelas: "6B" },
@@ -30,8 +28,6 @@ const validStudents = [
   { nisn: "3157774636", nama: "MUHAMMAD NUR", kelas: "6B" },
   { nisn: "0127036921", nama: "Siti Almirah", kelas: "6B" },
   { nisn: "0157732812", nama: "UTARI MAHYA SANJAYA", kelas: "6B" },
-
-  // KELAS 6A
   { nisn: "3156000315", nama: "ABID AQILAH WAHYUDI", kelas: "6A" },
   { nisn: "3147561743", nama: "AINUN HAKIMAH", kelas: "6A" },
   { nisn: "0142128968", nama: "AINUN NUR AZIZAH A", kelas: "6A" },
@@ -60,9 +56,7 @@ const validStudents = [
   { nisn: "0141239341", nama: "ZAM ZAMMY KHAIRIL MALIKI ABHAL", kelas: "6A" }
 ];
 
-// Penggabungan 160 Soal
 const allQuestions = [
-  // PAI PG (1-15)
   { id: 1, mapel: "PAI", type: "pg", text: "Rukun iman yang keenam adalah iman kepada ....", options: ["A. Rasul", "B. Hari akhir", "C. Qada dan Qadar", "D. Malaikat"], answer: 2 },
   { id: 2, mapel: "PAI", type: "pg", text: "Rudi sudah belajar dengan giat, tetapi nilai ulangannya belum sesuai harapan. Sikap yang sesuai dengan iman kepada Qada dan Qadar adalah ....", options: ["A. Menyalahkan gurunya", "B. Berhenti belajar", "C. Mencontek agar nilai naik", "D. Bersabar, mengevaluasi diri, dan tetap berusaha"], answer: 3 },
   { id: 3, mapel: "PAI", type: "pg", text: "Asmaul Husna Ar-Rahman berarti ....", options: ["A. Maha Pengasih", "B. Maha Melihat", "C. Maha Mendengar", "D. Maha Kuasa"], answer: 0 },
@@ -78,15 +72,11 @@ const allQuestions = [
   { id: 13, mapel: "PAI", type: "pg", text: "Rina melihat temannya membuang sampah sembarangan. Ia mengingatkannya karena kebersihan adalah ....", options: ["A. Sebagian dari iman", "B. Syarat naik kelas", "C. Tugas petugas kebersihan saja", "D. Aturan yang boleh dilanggar"], answer: 0 },
   { id: 14, mapel: "PAI", type: "pg", text: "Husnuzan artinya ....", options: ["A. Prasangka buruk", "B. Iri hati", "C. Berprasangka baik", "D. Marah"], answer: 2 },
   { id: 15, mapel: "PAI", type: "pg", text: "Dua orang teman bertengkar. Andi lalu meminta maaf lebih dulu dan memaafkan temannya. Akhlak yang ditunjukkan Andi adalah ....", options: ["A. Tamak", "B. Hasad", "C. Takabur", "D. Pemaaf"], answer: 3 },
-  
-  // PAI Uraian (16-20)
   { id: 16, mapel: "PAI", type: "essay", text: "Jelaskan arti beriman kepada Qada dan Qadar, lalu berikan satu contoh penerapannya di sekolah!" },
   { id: 17, mapel: "PAI", type: "essay", text: "Dimas sudah berlatih keras, tetapi gagal menjuarai lomba. Ia kecewa dan ingin berhenti mengikuti lomba. Berikan nasihat kepada Dimas berdasarkan sikap sabar dan tawakal!" },
   { id: 18, mapel: "PAI", type: "essay", text: "Sebutkan empat sifat wajib rasul beserta artinya!" },
   { id: 19, mapel: "PAI", type: "essay", text: "Sebutkan tiga hal yang dapat membatalkan puasa!" },
   { id: 20, mapel: "PAI", type: "essay", text: "Saat ujian, Hana melihat temannya menyontek. Apa yang sebaiknya dilakukan Hana menurut akhlak terpuji? Jelaskan alasannya!" },
-
-  // Pancasila PG (21-35)
   { id: 21, mapel: "Pancasila", type: "pg", text: "Sila ketiga Pancasila berbunyi ....", options: ["A. Kemanusiaan yang adil dan beradab", "B. Persatuan Indonesia", "C. Kerakyatan yang dipimpin oleh hikmat...", "D. Keadilan sosial..."], answer: 1 },
   { id: 22, mapel: "Pancasila", type: "pg", text: "Pak RT mengajak seluruh warga membersihkan selokan bersama-sama tanpa membedakan suku dan agama. Nilai yang tampak dari kegiatan tersebut adalah ....", options: ["A. Ketuhanan semata", "B. Kekuasaan", "C. Persaingan", "D. Persatuan dan gotong royong"], answer: 3 },
   { id: 23, mapel: "Pancasila", type: "pg", text: "Berikut yang termasuk hak warga negara adalah ....", options: ["A. Mendapatkan pendidikan", "B. Membayar pajak", "C. Menaati hukum", "D. Membela negara"], answer: 0 },
@@ -102,15 +92,11 @@ const allQuestions = [
   { id: 33, mapel: "Pancasila", type: "pg", text: "Di sekolah diadakan pemilihan ketua OSIS. Setiap siswa memilih sesuai hati nurani tanpa paksaan. Hal ini mencerminkan prinsip ....", options: ["A. Otoriter", "B. Demokrasi", "C. Monarki", "D. Anarki"], answer: 1 },
   { id: 34, mapel: "Pancasila", type: "pg", text: "Di desa Sari, warga berbeda agama hidup rukun. Saat ada hari raya, mereka tidak mengganggu ibadah satu sama lain dan saling membantu. Sikap ini disebut ....", options: ["A. Toleransi", "B. Egoisme", "C. Diskriminasi", "D. Fanatisme"], answer: 0 },
   { id: 35, mapel: "Pancasila", type: "pg", text: "Beni menuntut haknya memakai fasilitas sekolah tetapi tidak mau ikut menjaga kebersihan. Sikap yang benar adalah ....", options: ["A. Menuntut hak saja", "B. Menjalankan kewajiban saja", "C. Tidak peduli", "D. Menjalankan kewajiban bersamaan dengan hak"], answer: 3 },
-
-  // Pancasila Uraian (36-40)
   { id: 36, mapel: "Pancasila", type: "essay", text: "Tuliskan bunyi kelima sila Pancasila secara berurutan!" },
   { id: 37, mapel: "Pancasila", type: "essay", text: "Dua kelompok murid berselisih karena sama-sama ingin memakai lapangan untuk kegiatan pada hari yang sama. Bagaimana cara menyelesaikannya melalui musyawarah?" },
   { id: 38, mapel: "Pancasila", type: "essay", text: "Jelaskan perbedaan hak dan kewajiban, lalu berikan masing-masing dua contoh di lingkungan sekolah!" },
   { id: 39, mapel: "Pancasila", type: "essay", text: "Seorang siswa baru berbeda suku dan logat bicaranya sering diejek. Analisislah tindakan teman-temannya, sebutkan sila yang dilanggar, dan berikan solusinya!" },
   { id: 40, mapel: "Pancasila", type: "essay", text: "Jelaskan pentingnya gotong royong dan berikan dua contoh penerapannya di lingkungan tempat tinggalmu!" },
-
-  // Bahasa Indonesia PG (41-55)
   { id: 41, mapel: "Bahasa Indonesia", type: "pg", text: "[Bacaan 1: Hutan Mangrove Penjaga Pantai]\nGagasan utama bacaan di atas adalah ....", options: ["A. Mangrove banyak ditebang", "B. Nelayan kesulitan mencari ikan", "C. Pentingnya hutan mangrove bagi pesisir", "D. Warga Desa Bahari menanam bibit"], answer: 2 },
   { id: 42, mapel: "Bahasa Indonesia", type: "pg", text: "Manfaat akar mangrove menurut bacaan adalah ....", options: ["A. Menahan ombak sehingga abrasi berkurang", "B. Menyuburkan tambak", "C. Memperluas permukiman", "D. Menarik wisatawan"], answer: 0 },
   { id: 43, mapel: "Bahasa Indonesia", type: "pg", text: "Hasil tangkapan nelayan menurun karena ....", options: ["A. Ombak semakin tenang", "B. Warga menanam bibit", "C. Jumlah nelayan bertambah", "D. Mangrove ditebang sehingga tempat berkembang biak ikan hilang"], answer: 3 },
@@ -126,15 +112,11 @@ const allQuestions = [
   { id: 53, mapel: "Bahasa Indonesia", type: "pg", text: "\"Kakiku mau patah karena berjalan seharian.\" Kalimat ini mengandung majas ....", options: ["A. Metafora", "B. Hiperbola", "C. Personifikasi", "D. Simile"], answer: 1 },
   { id: 54, mapel: "Bahasa Indonesia", type: "pg", text: "Kata baku yang tepat adalah ....", options: ["A. Apotik", "B. Resiko", "C. Praktik", "D. Nasehat"], answer: 2 },
   { id: 55, mapel: "Bahasa Indonesia", type: "pg", text: "Kalimat pembuka pidato yang paling sesuai adalah ....", options: ["A. \"Woi, dengarkan aku bicara!\"", "B. \"Bapak dan Ibu guru serta teman-teman yang saya hormati, ....\"", "C. \"Halo, aku mau cerita nih.\"", "D. \"Pokoknya hari ini aku mau bicara.\""], answer: 1 },
-
-  // Bahasa Indonesia Uraian (56-60)
   { id: 56, mapel: "Bahasa Indonesia", type: "essay", text: "Ringkaslah bacaan 1 (Hutan Mangrove) menjadi dua kalimat!" },
   { id: 57, mapel: "Bahasa Indonesia", type: "essay", text: "Dari bacaan 1, tuliskan dua penyebab dan dua akibat dari penebangan mangrove!" },
   { id: 58, mapel: "Bahasa Indonesia", type: "essay", text: "Sebutkan watak Dani pada bacaan 2 beserta bukti dari cerita!" },
   { id: 59, mapel: "Bahasa Indonesia", type: "essay", text: "Buatlah pidato singkat (4-5 kalimat) bertema 'Menjaga Kebersihan Sekolah'!" },
   { id: 60, mapel: "Bahasa Indonesia", type: "essay", text: "Kembangkan gagasan utama 'Membaca bermanfaat bagi kita' menjadi satu paragraf (minimal 4 kalimat)!" },
-
-  // Matematika PG (61-75)
   { id: 61, mapel: "Matematika", type: "pg", text: "Suhu di puncak gunung -3 derajat Celsius, sedangkan di kaki gunung 25 derajat Celsius. Selisih suhunya adalah ....", options: ["A. 22 derajat Celsius", "B. 25 derajat Celsius", "C. 28 derajat Celsius", "D. 30 derajat Celsius"], answer: 2 },
   { id: 62, mapel: "Matematika", type: "pg", text: "Sebuah kapal selam berada 40 m di bawah permukaan laut. Kapal naik 15 m, lalu turun lagi 30 m. Posisi akhir kapal selam adalah ....", options: ["A. 55 m di bawah permukaan laut", "B. 25 m di bawah permukaan laut", "C. 55 m di atas permukaan laut", "D. 85 m di bawah permukaan laut"], answer: 0 },
   { id: 63, mapel: "Matematika", type: "pg", text: "Hasil dari (-12) + 8 - (-5) adalah ....", options: ["A. -9", "B. -1", "C. 1", "D. 9"], answer: 2 },
@@ -150,15 +132,11 @@ const allQuestions = [
   { id: 73, mapel: "Matematika", type: "pg", text: "Bak mandi berbentuk kubus dengan sisi 80 cm terisi penuh air. Volume air tersebut adalah ....", options: ["A. 64 liter", "B. 512 liter", "C. 5.120 liter", "D. 640 liter"], answer: 1 },
   { id: 74, mapel: "Matematika", type: "pg", text: "Akuarium berbentuk balok berukuran 60 cm x 40 cm x 30 cm diisi air setinggi 3/4 tinggi akuarium. Volume air adalah ....", options: ["A. 54 liter", "B. 72 liter", "C. 18 liter", "D. 54.000 liter"], answer: 0 },
   { id: 75, mapel: "Matematika", type: "pg", text: "Rata-rata tiga nilai ulangan Dika adalah 80. Agar rata-rata empat ulangan menjadi 82, nilai ulangan keempat harus ....", options: ["A. 84", "B. 86", "C. 88", "D. 90"], answer: 2 },
-
-  // Matematika Uraian (76-80)
   { id: 76, mapel: "Matematika", type: "essay", text: "Sebuah gedung memiliki 3 lantai basement di bawah lantai dasar. Rina naik lift dari basement 3 ke lantai 5, lalu turun 2 lantai. Di lantai berapa Rina sekarang?" },
   { id: 77, mapel: "Matematika", type: "essay", text: "Dina membawa uang Rp500.000. Ia ingin membeli sepatu Rp350.000 dan tas Rp250.000. Keduanya diskon 20%. Cukupkah uang Dina? Jelaskan!" },
   { id: 78, mapel: "Matematika", type: "essay", text: "Resep kue untuk 4 orang memerlukan 300 g tepung, 100 g gula, dan 2 butir telur. Berapa bahan yang diperlukan untuk 10 orang?" },
   { id: 79, mapel: "Matematika", type: "essay", text: "Kolam renang berbentuk balok berukuran 12 m x 6 m x 1,5 m. Kolam diisi air dengan pompa 9 m kubik per jam. Berapa jam waktu sampai penuh?" },
   { id: 80, mapel: "Matematika", type: "essay", text: "Dari 40 siswa kelas VI, 16 siswa suka olahraga, 12 membaca, 8 menggambar, sisa hobi lain. Tentukan persentase tiap hobi & hobi paling diminati!" },
-
-  // IPAS PG (81-95)
   { id: 81, mapel: "IPAS", type: "pg", text: "Organ tubuh yang berfungsi memompa darah ke seluruh tubuh adalah ....", options: ["A. Paru-paru", "B. Jantung", "C. Lambung", "D. Ginjal"], answer: 1 },
   { id: 82, mapel: "IPAS", type: "pg", text: "Rafi berlari selama 10 menit. Napasnya menjadi lebih cepat dan jantungnya berdetak lebih kencang. Penjelasan yang tepat adalah ....", options: ["A. Tubuh Rafi sedang sakit", "B. Paru-parunya mengalami kerusakan", "C. Jantungnya lelah selamanya", "D. Otot membutuhkan lebih banyak oksigen"], answer: 3 },
   { id: 83, mapel: "IPAS", type: "pg", text: "Fungsi utama usus halus adalah ....", options: ["A. Menyerap sari-sari makanan", "B. Menyimpan sisa makanan", "C. Menyaring darah", "D. Memompa darah"], answer: 0 },
@@ -174,15 +152,11 @@ const allQuestions = [
   { id: 93, mapel: "IPAS", type: "pg", text: "Orang yang menggunakan atau membeli barang untuk memenuhi kebutuhannya disebut ....", options: ["A. Produsen", "B. Konsumen", "C. Distributor", "D. Pedagang"], answer: 1 },
   { id: 94, mapel: "IPAS", type: "pg", text: "Menjelang hari raya, harga cabai naik. Penyebab yang paling mungkin adalah ....", options: ["A. Permintaan meningkat persediaan terbatas", "B. Persediaan cabai banyak", "C. Tidak ada yang membeli", "D. Cabai tidak laku"], answer: 0 },
   { id: 95, mapel: "IPAS", type: "pg", text: "Teks Proklamasi Kemerdekaan Indonesia dibacakan oleh ....", options: ["A. Jenderal Sudirman", "B. Ki Hajar Dewantara", "C. Moh. Yamin", "D. Ir. Soekarno dan Drs. Moh. Hatta"], answer: 3 },
-
-  // IPAS Uraian (96-100)
   { id: 96, mapel: "IPAS", type: "essay", text: "Jelaskan perjalanan makanan dari mulut hingga menjadi sisa pembuangan, sebutkan organ yang dilalui!" },
   { id: 97, mapel: "IPAS", type: "essay", text: "Ani selalu sarapan minuman manis. Analisislah dampaknya bagi tubuh dan susunlah menu sarapan bergizi seimbang!" },
   { id: 98, mapel: "IPAS", type: "essay", text: "Pada rantai makanan padi, tikus, ular, elang; jika elang sering diburu manusia hingga habis, jelaskan dampaknya!" },
   { id: 99, mapel: "IPAS", type: "essay", text: "Sebutkan tiga contoh perubahan energi yang terjadi di rumah dan jelaskan!" },
   { id: 100, mapel: "IPAS", type: "essay", text: "Sungai dekat desa menjadi keruh dan berbau karena sampah. Berikan tiga solusi yang dapat dilakukan warga!" },
-
-  // PJOK PG (101-115)
   { id: 101, mapel: "PJOK", type: "pg", text: "Berikut yang termasuk permainan bola besar adalah ....", options: ["A. Kasti", "B. Bulu tangkis", "C. Sepak bola", "D. Tenis meja"], answer: 2 },
   { id: 102, mapel: "PJOK", type: "pg", text: "Teknik dasar mengoper bola pendek dalam sepak bola menggunakan ....", options: ["A. Kaki bagian dalam", "B. Ujung jari kaki", "C. Tumit", "D. Lutut"], answer: 0 },
   { id: 103, mapel: "PJOK", type: "pg", text: "Dalam permainan kasti, pemain yang bertugas melambungkan bola kepada pemukul disebut ....", options: ["A. Penjaga", "B. Pemukul", "C. Penangkap", "D. Pelambung"], answer: 3 },
@@ -198,15 +172,11 @@ const allQuestions = [
   { id: 113, mapel: "PJOK", type: "pg", text: "Salah satu cara menjaga kebersihan diri adalah ....", options: ["A. Mandi dan gosok gigi teratur", "B. Baju sama berhari-hari", "C. Jarang cuci tangan", "D. Potong kuku setahun sekali"], answer: 0 },
   { id: 114, mapel: "PJOK", type: "pg", text: "Jumlah pemain inti dalam satu regu permainan bola voli adalah ....", options: ["A. 5", "B. 7", "C. 6", "D. 11"], answer: 2 },
   { id: 115, mapel: "PJOK", type: "pg", text: "Rendi ingin meningkatkan kebugaran tanpa alat. Pilihan paling tepat adalah ....", options: ["A. Nonton TV", "B. Tidur siang", "C. Makan manis", "D. Berlari pagi dan lompat tali rutin"], answer: 3 },
-
-  // PJOK Uraian (116-120)
   { id: 116, mapel: "PJOK", type: "essay", text: "Tuliskan urutan gerakan lompat jauh dan jelaskan singkat tiap tahapannya!" },
   { id: 117, mapel: "PJOK", type: "essay", text: "Jelaskan manfaat pemanasan dan pendinginan dalam berolahraga!" },
   { id: 118, mapel: "PJOK", type: "essay", text: "Saat bermain, temanmu terjatuh dan lengannya berdarah. Tuliskan langkah pertolongan pertama!" },
   { id: 119, mapel: "PJOK", type: "essay", text: "Tono menyentuh bola ketika keluar garis tapi tidak mengaku. Analisislah sikap Tono dan sikap yang seharusnya!" },
   { id: 120, mapel: "PJOK", type: "essay", text: "Susunlah jadwal sederhana kegiatan sehari-hari yang mencerminkan pola hidup sehat!" },
-
-  // Seni Budaya PG (121-135)
   { id: 121, mapel: "Seni Budaya", type: "pg", text: "Unsur seni rupa yang terbentuk dari titik yang bergerak adalah ....", options: ["A. Bidang", "B. Garis", "C. Warna", "D. Tekstur"], answer: 1 },
   { id: 122, mapel: "Seni Budaya", type: "pg", text: "Warna primer terdiri atas ....", options: ["A. Hijau, jingga, ungu", "B. Hitam, putih, abu-abu", "C. Merah, hijau, biru muda", "D. Merah, kuning, biru"], answer: 3 },
   { id: 123, mapel: "Seni Budaya", type: "pg", text: "Campuran warna merah dan kuning menghasilkan warna ....", options: ["A. Jingga", "B. Hijau", "C. Ungu", "D. Cokelat"], answer: 0 },
@@ -222,15 +192,11 @@ const allQuestions = [
   { id: 133, mapel: "Seni Budaya", type: "pg", text: "Prinsip keseimbangan dalam karya seni rupa adalah ....", options: ["A. Penataan unsur agar terlihat serasi dan stabil", "B. Satu warna saja", "C. Objek sebesar-besarnya", "D. Mengosongkan bidang"], answer: 0 },
   { id: 134, mapel: "Seni Budaya", type: "pg", text: "Tujuan diadakannya pameran karya seni di sekolah adalah ....", options: ["A. Cari kesalahan", "B. Menghargai karya dan menampilkan ke orang lain", "C. Mengejek", "D. Membandingkan nilai"], answer: 1 },
   { id: 135, mapel: "Seni Budaya", type: "pg", text: "Budi ingin menampilkan kesan jarak jauh dalam gambar pemandangan, tekniknya ....", options: ["A. Objek jauh lebih besar", "B. Sama besar", "C. Satu warna tebal", "D. Objek jauh digambar lebih kecil & warna pudar"], answer: 3 },
-
-  // Seni Budaya Uraian (136-140)
   { id: 136, mapel: "Seni Budaya", type: "essay", text: "Jelaskan perbedaan warna primer dan warna sekunder, lalu berikan contohnya!" },
   { id: 137, mapel: "Seni Budaya", type: "essay", text: "Tuliskan langkah-langkah membuat karya kolase dari bahan bekas!" },
   { id: 138, mapel: "Seni Budaya", type: "essay", text: "Kamu diminta membuat poster bertema 'Cintai Lingkungan'. Jelaskan unsur-unsur yang harus ada!" },
   { id: 139, mapel: "Seni Budaya", type: "essay", text: "Membuat tempat pensil dari kaleng bekas. Analisislah manfaatnya bagi lingkungan dan bagi siswa!" },
   { id: 140, mapel: "Seni Budaya", type: "essay", text: "Mengapa kain tenun/sutra Mandar perlu dilestarikan? Berikan 2 alasan dan 1 cara melestarikannya!" },
-
-  // Bahasa Inggris PG (141-155)
   { id: 141, mapel: "Bahasa Inggris", type: "pg", text: "[Text Sinta]\nHow old is Sinta?", options: ["A. Eleven", "B. Twelve", "C. Thirteen", "D. Ten"], answer: 1 },
   { id: 142, mapel: "Bahasa Inggris", type: "pg", text: "What time does Sinta wake up?", options: ["A. 5.00", "B. 6.00", "C. 6.30", "D. 5.30"], answer: 3 },
   { id: 143, mapel: "Bahasa Inggris", type: "pg", text: "How does Sinta go to school?", options: ["A. By bicycle", "B. By bus", "C. On foot", "D. By motorbike"], answer: 0 },
@@ -246,8 +212,6 @@ const allQuestions = [
   { id: 153, mapel: "Bahasa Inggris", type: "pg", text: "A place where we borrow books is a ....", options: ["A. library", "B. canteen", "C. market", "D. hospital"], answer: 0 },
   { id: 154, mapel: "Bahasa Inggris", type: "pg", text: "What do you say to ask someone's name?", options: ["A. How old are you?", "B. What is your name?", "C. Where do you live?", "D. What time is it?"], answer: 1 },
   { id: 155, mapel: "Bahasa Inggris", type: "pg", text: "Rina: \"Thank you for helping me.\"\nDani: \"....\"", options: ["A. Good bye", "B. I'm sorry", "C. Nice to meet you", "D. You're welcome"], answer: 3 },
-
-  // Bahasa Inggris Uraian (156-160)
   { id: 156, mapel: "Bahasa Inggris", type: "essay", text: "Answer based on text Sinta: (a) Where does Sinta live? (b) Who does she live with? (c) What does she do every morning?" },
   { id: 157, mapel: "Bahasa Inggris", type: "essay", text: "Write four sentences about your daily activities!" },
   { id: 158, mapel: "Bahasa Inggris", type: "essay", text: "Arrange the words into a good sentence: 'school / goes / to / she / every day'." },
@@ -255,13 +219,11 @@ const allQuestions = [
   { id: 160, mapel: "Bahasa Inggris", type: "essay", text: "Complete dialogue: Dani: 'Good morning, Rina. How are you?' | Rina: '....' | Dani: 'Where are you going?' | Rina: '....'" }
 ];
 
-// Global State
 let selectedKelas = "";
 let currentUser = null;
 let currentQuestionIndex = 0;
 let userAnswers = {};
 
-// Handle Pilih Tombol Kelas
 document.querySelectorAll(".btn-kelas").forEach(btn => {
   btn.addEventListener("click", function() {
     document.querySelectorAll(".btn-kelas").forEach(b => b.classList.remove("selected"));
@@ -270,10 +232,9 @@ document.querySelectorAll(".btn-kelas").forEach(btn => {
   });
 });
 
-// Event Login Form
 document.getElementById("login-form").addEventListener("submit", function(e) {
   e.preventDefault();
-  const inputNisn = document.getElementById("nisn").value.trim();
+  const inputVal = document.getElementById("nisn").value.trim().toLowerCase();
   const loginError = document.getElementById("login-error");
 
   if (!selectedKelas) {
@@ -281,8 +242,20 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
     return;
   }
 
-  const student = validStudents.find(s => s.nisn === inputNisn && s.kelas === selectedKelas);
+  // Pengecekan Khusus: Jika email mountkareumbi@gmail.com
+  if (inputVal === "mountkareumbi@gmail.com") {
+    loginError.style.display = "none";
+    currentUser = { nisn: "ADMIN", nama: "Administrator Mountkareumbi", kelas: selectedKelas, email: "mountkareumbi@gmail.com" };
+    
+    // Sembunyikan login, tampilkan layar Passing Grade
+    document.getElementById("login-screen").classList.add("hidden");
+    document.getElementById("passing-grade-screen").classList.remove("hidden");
+    renderPassingGradeTable();
+    return;
+  }
 
+  // Login Normal untuk Siswa berdasarkan NISN & Kelas
+  const student = validStudents.find(s => s.nisn === inputVal && s.kelas === selectedKelas);
   if (!student) {
     loginError.style.display = "block";
     return;
@@ -307,6 +280,9 @@ document.getElementById("btn-back-login").addEventListener("click", function() {
 document.getElementById("btn-start-exam").addEventListener("click", function() {
   document.getElementById("confirm-screen").classList.add("hidden");
   document.getElementById("exam-screen").classList.remove("hidden");
+
+  // Kirim data latar belakang ke Apps Script saat mulai ujian
+  kirimProgressKeServer(false);
 
   renderNumberGrid();
   loadQuestion(0);
@@ -363,6 +339,7 @@ function loadQuestion(index) {
       radio.onchange = () => {
         userAnswers[index] = optIdx;
         renderNumberGrid();
+        kirimProgressKeServer(false);
       };
 
       item.appendChild(radio);
@@ -378,6 +355,7 @@ function loadQuestion(index) {
     essayTextarea.oninput = (e) => {
       userAnswers[index] = e.target.value;
       renderNumberGrid();
+      kirimProgressKeServer(false);
     };
   }
 
@@ -401,17 +379,55 @@ document.getElementById("btn-finish").onclick = () => {
   }
 };
 
+function hitungSkorSementara() {
+  let pgScore = 0;
+  allQuestions.forEach((q, idx) => {
+    if (q.type === "pg" && userAnswers[idx] === q.answer) {
+      pgScore += 2;
+    }
+  });
+  return pgScore;
+}
+
+// Fungsi pengiriman data ke Apps Script secara asinkron (cors aman)
+function kirimProgressKeServer(isSelesai) {
+  if (!currentUser || currentUser.email) return; // Jangan kirim jika login sebagai admin email
+
+  const pgScore = hitungSkorSementara();
+  let essayTextSummary = "";
+  allQuestions.forEach((q, idx) => {
+    if (q.type === "essay") {
+      essayTextSummary += `[Soal ${idx + 1}]: ${userAnswers[idx] || "Kosong"} | `;
+    }
+  });
+
+  const payload = {
+    nama: currentUser.nama,
+    nisn: currentUser.nisn,
+    kelas: currentUser.kelas,
+    skorPG: pgScore,
+    jawabanUraian: essayTextSummary,
+    selesai: isSelesai
+  };
+
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "text/plain" },
+    body: JSON.stringify(payload)
+  }).catch(err => {
+    console.log("Kirim data latar belakang:", err);
+  });
+}
+
 function finishExam() {
   document.getElementById("exam-screen").classList.add("hidden");
   document.getElementById("result-screen").classList.remove("hidden");
 
-  let pgScore = 0;
-  let essayTextSummary = "";
-  
+  let pgScore = hitungSkorSementara();
   const pgLabels = [];
   const pgCorrectData = [];
   const pgWrongData = [];
-
   let cumulativeCorrect = 0;
   let cumulativeWrong = 0;
 
@@ -419,18 +435,13 @@ function finishExam() {
     if (q.type === "pg") {
       pgLabels.push(`S${idx + 1}`);
       const isCorrect = (userAnswers[idx] === q.answer);
-      
       if (isCorrect) {
-        pgScore += 2;
         cumulativeCorrect++;
       } else {
         cumulativeWrong++;
       }
-
       pgCorrectData.push(cumulativeCorrect);
       pgWrongData.push(cumulativeWrong);
-    } else {
-      essayTextSummary += `[Soal ${idx + 1} - ${q.mapel}]: ${userAnswers[idx] || "Tidak Diisi"} | `;
     }
   });
 
@@ -441,89 +452,64 @@ function finishExam() {
 
   renderResultChart(pgLabels, pgCorrectData, pgWrongData);
 
-  const payload = {
-    action: "save",
-    nama: currentUser.nama,
-    nisn: currentUser.nisn,
-    kelas: currentUser.kelas,
-    skorPG: pgScore,
-    jawabanUraian: essayTextSummary
-  };
+  kirimProgressKeServer(true);
 
-  fetch(GOOGLE_SCRIPT_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  })
-  .then(() => {
-    document.getElementById("res-status").innerText = "Berhasil Terkirim ke Spreadsheet Admin!";
-    document.getElementById("res-status").style.color = "#52c41a";
-  })
-  .catch((err) => {
-    document.getElementById("res-status").innerText = "Gagal Mengirim, Silakan Hubungi Guru.";
-    document.getElementById("res-status").style.color = "#ff4d4f";
-  });
+  document.getElementById("res-status").innerText = "Berhasil Terkirim ke Server Sekolah!";
+  document.getElementById("res-status").style.color = "#52c41a";
 }
 
-// Rendering Stacked Bar Chart (Merah di Bawah, Biru Bertumpuk di Atas)
 function renderResultChart(labels, correctData, wrongData) {
   const ctx = document.getElementById('resultChart').getContext('2d');
-
   if (window.myResultChart) {
     window.myResultChart.destroy();
   }
-
   window.myResultChart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: labels,
       datasets: [
-        {
-          label: 'Jawaban Salah / Kosong (Merah)',
-          data: wrongData,
-          backgroundColor: '#b83b32',
-          barPercentage: 1.0,
-          categoryPercentage: 1.0
-        },
-        {
-          label: 'Jawaban Benar (Biru)',
-          data: correctData,
-          backgroundColor: '#4285f4',
-          barPercentage: 1.0,
-          categoryPercentage: 1.0
-        }
+        { label: 'Jawaban Salah / Kosong (Merah)', data: wrongData, backgroundColor: '#b83b32', barPercentage: 1.0, categoryPercentage: 1.0 },
+        { label: 'Jawaban Benar (Biru)', data: correctData, backgroundColor: '#4285f4', barPercentage: 1.0, categoryPercentage: 1.0 }
       ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: 'top',
-          labels: { font: { weight: 'bold' } }
-        }
-      },
+      plugins: { legend: { position: 'top', labels: { font: { weight: 'bold' } } } },
       scales: {
-        x: {
-          stacked: true,
-          grid: { display: false },
-          ticks: {
-            font: { size: 8 },
-            maxRotation: 0,
-            autoSkip: true,
-            maxTicksLimit: 20
-          }
-        },
-        y: {
-          stacked: true,
-          beginAtZero: true,
-          title: {
-            display: true,
-            text: 'Jumlah Soal'
-          }
-        }
+        x: { stacked: true, grid: { display: false }, ticks: { font: { size: 8 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 20 } },
+        y: { stacked: true, beginAtZero: true, title: { display: true, text: 'Jumlah Soal' } }
       }
     }
+  });
+}
+
+// Render Tabel Passing Grade untuk Admin (mountkareumbi@gmail.com)
+function renderPassingGradeTable() {
+  const tbody = document.getElementById("passing-table-body");
+  tbody.innerHTML = "";
+  
+  // Simulasi data siswa (Passing Grade standar min 180 dari 240 atau 75%)
+  validStudents.forEach((s, idx) => {
+    // Dummy random skor realistis untuk preview rekap passing grade
+    const dummySkor = Math.floor(Math.random() * 60) + 150; 
+    const persentase = ((dummySkor / 240) * 100).toFixed(1);
+    const isPass = dummySkor >= 180;
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${idx + 1}</td>
+      <td>${s.nisn}</td>
+      <td style="text-align: left; font-weight: 600;">${s.nama}</td>
+      <td>${s.kelas}</td>
+      <td style="font-weight: bold; color: #1677ff;">${dummySkor} / 240</td>
+      <td>${persentase}%</td>
+      <td>
+        <span style="padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; background: ${isPass ? '#f6ffed; color: #52c41a; border: 1px solid #b7eb8f;' : '#fff2f0; color: #ff4d4f; border: 1px solid #ffccc7;'}">
+          ${isPass ? 'LULUS (PASSING GRADE)'/ : 'REMEDIAL'}
+        </span>
+      </td>
+    `;
+    tbody.appendChild(tr);
   });
 }

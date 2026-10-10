@@ -1,5 +1,5 @@
 // URL APPS SCRIPT WEB APP
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwZSJyQ6g6zioshADN5T9dJdDyrnhUv2YzwvlsuSsHmi_zxFPAkC7AurQfbgvZAQgiq0g/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxqrm1c_POJsS2qvC-gJgqKIG000WhGPktu881KBW7e7NjXw53KizdAt5xjRx0etWCi/exec";
 
 const validStudents = [
   { nisn: "3140466270", nama: "AIRIN RAHMI ANDINI", kelas: "6B" },

@@ -1,5 +1,5 @@
 // ISI DENGAN URL APPS SCRIPT WEB APP ANDA YANG BENAR
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz0PwK4joZSnUULPaZcikIrOjB0eqqyRS1qDHJPsAc__oeO1OHDpYl7ycoSlIGU0ah5KQ/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwaRxYKINNzIDZfRlh6gsjkCSoSP4096V01LUlbG0CW/dev";
 
 const validStudents = [
   { nisn: "3140466270", nama: "AIRIN RAHMI ANDINI", kelas: "6B" },

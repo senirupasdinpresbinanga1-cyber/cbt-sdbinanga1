@@ -1,5 +1,5 @@
 // ISI DENGAN URL APPS SCRIPT WEB APP ANDA YANG BENAR
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfi2tl5A_Er5_LRkxHehm0ey0Zg4LMbnz598kVc7O9jXMD9UT8aaodMU2mwlpgTXTR6w/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz0PwK4joZSnUULPaZcikIrOjB0eqqyRS1qDHJPsAc__oeO1OHDpYl7ycoSlIGU0ah5KQ/exec";
 
 const validStudents = [
   { nisn: "3140466270", nama: "AIRIN RAHMI ANDINI", kelas: "6B" },
@@ -268,7 +268,6 @@ document.getElementById("btn-start-exam").addEventListener("click", function() {
   document.getElementById("confirm-screen").classList.add("hidden");
   document.getElementById("exam-screen").classList.remove("hidden");
 
-  // Kirim data langsung ke Apps Script saat mulai ujian
   kirimProgressKeServer(false);
 
   renderNumberGrid();
@@ -376,7 +375,7 @@ function hitungSkorSementara() {
   return pgScore;
 }
 
-// FIX UTAMA: Menggunakan Image Beacon / POST fallback agar tembus CORS Apps Script
+// PERBAIKAN PENGIRIMAN DATA: Menggunakan URLSearchParams agar terbaca sempurna di Google Apps Script
 function kirimProgressKeServer(isSelesai) {
   if (!currentUser) return;
 
@@ -394,15 +393,15 @@ function kirimProgressKeServer(isSelesai) {
     kelas: currentUser.kelas,
     skorPG: pgScore,
     jawabanUraian: essayTextSummary,
-    selesai: isSelesai
+    selesai: isSelesai ? "true" : "false"
   };
 
-  // Menggunakan fetch POST dengan mode no-cors
+  const encodedData = new URLSearchParams(payload).toString();
+
   fetch(GOOGLE_SCRIPT_URL, {
     method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "text/plain" },
-    body: JSON.stringify(payload)
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: encodedData
   }).catch(err => {
     console.log("Kirim data latar belakang:", err);
   });

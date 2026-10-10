@@ -78,7 +78,7 @@ const allQuestions = [
   { id: 13, mapel: "PAI", type: "pg", text: "Rina melihat temannya membuang sampah sembarangan. Ia mengingatkannya karena kebersihan adalah ....", options: ["A. Sebagian dari iman", "B. Syarat naik kelas", "C. Tugas petugas kebersihan saja", "D. Aturan yang boleh dilanggar"], answer: 0 },
   { id: 14, mapel: "PAI", type: "pg", text: "Husnuzan artinya ....", options: ["A. Prasangka buruk", "B. Iri hati", "C. Berprasangka baik", "D. Marah"], answer: 2 },
   { id: 15, mapel: "PAI", type: "pg", text: "Dua orang teman bertengkar. Andi lalu meminta maaf lebih dulu dan memaafkan temannya. Akhlak yang ditunjukkan Andi adalah ....", options: ["A. Tamak", "B. Hasad", "C. Takabur", "D. Pemaaf"], answer: 3 },
-
+  
   // PAI Uraian (16-20)
   { id: 16, mapel: "PAI", type: "essay", text: "Jelaskan arti beriman kepada Qada dan Qadar, lalu berikan satu contoh penerapannya di sekolah!" },
   { id: 17, mapel: "PAI", type: "essay", text: "Dimas sudah berlatih keras, tetapi gagal menjuarai lomba. Ia kecewa dan ingin berhenti mengikuti lomba. Berikan nasihat kepada Dimas berdasarkan sikap sabar dan tawakal!" },
@@ -408,7 +408,6 @@ function finishExam() {
   let pgScore = 0;
   let essayTextSummary = "";
   
-  // Data Akumulasi Hasil Jawaban untuk Grafik
   const pgLabels = [];
   const pgCorrectData = [];
   const pgWrongData = [];
@@ -422,7 +421,7 @@ function finishExam() {
       const isCorrect = (userAnswers[idx] === q.answer);
       
       if (isCorrect) {
-        pgScore += 2; // Maksimal 240 poin PG
+        pgScore += 2;
         cumulativeCorrect++;
       } else {
         cumulativeWrong++;
@@ -440,10 +439,8 @@ function finishExam() {
   document.getElementById("res-kelas").innerText = currentUser.kelas;
   document.getElementById("res-score").innerText = pgScore;
 
-  // Visualisasikan Hasil dengan STACKED AREA CHART
   renderResultChart(pgLabels, pgCorrectData, pgWrongData);
 
-  // Kirim data ke Google Sheets
   const payload = {
     action: "save",
     nama: currentUser.nama,
@@ -469,37 +466,32 @@ function finishExam() {
   });
 }
 
-// Rendering STACKED AREA CHART (Merah di Bawah, Biru Bertumpuk di Atas)
+// Rendering Stacked Bar Chart (Merah di Bawah, Biru Bertumpuk di Atas)
 function renderResultChart(labels, correctData, wrongData) {
   const ctx = document.getElementById('resultChart').getContext('2d');
 
-  // Bersihkan chart lama jika ada
   if (window.myResultChart) {
     window.myResultChart.destroy();
   }
 
   window.myResultChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
       labels: labels,
       datasets: [
         {
           label: 'Jawaban Salah / Kosong (Merah)',
           data: wrongData,
-          borderColor: '#b83b32',
-          backgroundColor: '#b83b32', // Merah Solid di bawah
-          fill: true,
-          tension: 0,
-          pointRadius: 0
+          backgroundColor: '#b83b32',
+          barPercentage: 1.0,
+          categoryPercentage: 1.0
         },
         {
           label: 'Jawaban Benar (Biru)',
           data: correctData,
-          borderColor: '#4285f4',
-          backgroundColor: '#4285f4', // Biru Solid bertumpuk di atas
-          fill: true,
-          tension: 0,
-          pointRadius: 0
+          backgroundColor: '#4285f4',
+          barPercentage: 1.0,
+          categoryPercentage: 1.0
         }
       ]
     },
@@ -508,20 +500,23 @@ function renderResultChart(labels, correctData, wrongData) {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          position: 'right',
+          position: 'top',
           labels: { font: { weight: 'bold' } }
         }
       },
       scales: {
         x: {
-          stacked: true, // Mode Bertumpuk pada Sumbu X
+          stacked: true,
+          grid: { display: false },
           ticks: {
-            font: { size: 9 },
-            maxRotation: 0
+            font: { size: 8 },
+            maxRotation: 0,
+            autoSkip: true,
+            maxTicksLimit: 20
           }
         },
         y: {
-          stacked: true, // Mode Bertumpuk pada Sumbu Y (Memberikan efek seperti grafik Excel)
+          stacked: true,
           beginAtZero: true,
           title: {
             display: true,

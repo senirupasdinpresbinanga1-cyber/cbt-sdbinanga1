@@ -234,7 +234,7 @@ document.querySelectorAll(".btn-kelas").forEach(btn => {
 
 document.getElementById("login-form").addEventListener("submit", function(e) {
   e.preventDefault();
-  const inputVal = document.getElementById("nisn").value.trim().toLowerCase();
+  const inputNisn = document.getElementById("nisn").value.trim();
   const loginError = document.getElementById("login-error");
 
   if (!selectedKelas) {
@@ -242,20 +242,7 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
     return;
   }
 
-  // Pengecekan Khusus: Jika email mountkareumbi@gmail.com
-  if (inputVal === "mountkareumbi@gmail.com") {
-    loginError.style.display = "none";
-    currentUser = { nisn: "ADMIN", nama: "Administrator Mountkareumbi", kelas: selectedKelas, email: "mountkareumbi@gmail.com" };
-    
-    // Sembunyikan login, tampilkan layar Passing Grade
-    document.getElementById("login-screen").classList.add("hidden");
-    document.getElementById("passing-grade-screen").classList.remove("hidden");
-    renderPassingGradeTable();
-    return;
-  }
-
-  // Login Normal untuk Siswa berdasarkan NISN & Kelas
-  const student = validStudents.find(s => s.nisn === inputVal && s.kelas === selectedKelas);
+  const student = validStudents.find(s => s.nisn === inputNisn && s.kelas === selectedKelas);
   if (!student) {
     loginError.style.display = "block";
     return;
@@ -281,7 +268,7 @@ document.getElementById("btn-start-exam").addEventListener("click", function() {
   document.getElementById("confirm-screen").classList.add("hidden");
   document.getElementById("exam-screen").classList.remove("hidden");
 
-  // Kirim data latar belakang ke Apps Script saat mulai ujian
+  // Kirim data langsung ke Apps Script saat mulai ujian
   kirimProgressKeServer(false);
 
   renderNumberGrid();
@@ -389,9 +376,9 @@ function hitungSkorSementara() {
   return pgScore;
 }
 
-// Fungsi pengiriman data ke Apps Script secara asinkron (cors aman)
+// FIX UTAMA: Menggunakan Image Beacon / POST fallback agar tembus CORS Apps Script
 function kirimProgressKeServer(isSelesai) {
-  if (!currentUser || currentUser.email) return; // Jangan kirim jika login sebagai admin email
+  if (!currentUser) return;
 
   const pgScore = hitungSkorSementara();
   let essayTextSummary = "";
@@ -410,6 +397,7 @@ function kirimProgressKeServer(isSelesai) {
     selesai: isSelesai
   };
 
+  // Menggunakan fetch POST dengan mode no-cors
   fetch(GOOGLE_SCRIPT_URL, {
     method: "POST",
     mode: "no-cors",
@@ -481,35 +469,5 @@ function renderResultChart(labels, correctData, wrongData) {
         y: { stacked: true, beginAtZero: true, title: { display: true, text: 'Jumlah Soal' } }
       }
     }
-  });
-}
-
-// Render Tabel Passing Grade untuk Admin (mountkareumbi@gmail.com)
-function renderPassingGradeTable() {
-  const tbody = document.getElementById("passing-table-body");
-  tbody.innerHTML = "";
-  
-  // Simulasi data siswa (Passing Grade standar min 180 dari 240 atau 75%)
-  validStudents.forEach((s, idx) => {
-    // Dummy random skor realistis untuk preview rekap passing grade
-    const dummySkor = Math.floor(Math.random() * 60) + 150; 
-    const persentase = ((dummySkor / 240) * 100).toFixed(1);
-    const isPass = dummySkor >= 180;
-
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${idx + 1}</td>
-      <td>${s.nisn}</td>
-      <td style="text-align: left; font-weight: 600;">${s.nama}</td>
-      <td>${s.kelas}</td>
-      <td style="font-weight: bold; color: #1677ff;">${dummySkor} / 240</td>
-      <td>${persentase}%</td>
-      <td>
-        <span style="padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; background: ${isPass ? '#f6ffed; color: #52c41a; border: 1px solid #b7eb8f;' : '#fff2f0; color: #ff4d4f; border: 1px solid #ffccc7;'}">
-          ${isPass ? 'LULUS (PASSING GRADE)'/ : 'REMEDIAL'}
-        </span>
-      </td>
-    `;
-    tbody.appendChild(tr);
   });
 }

@@ -268,6 +268,7 @@ document.getElementById("btn-start-exam").addEventListener("click", function() {
   document.getElementById("confirm-screen").classList.add("hidden");
   document.getElementById("exam-screen").classList.remove("hidden");
 
+  // Kirim data langsung ke Apps Script saat mulai ujian
   kirimProgressKeServer(false);
 
   renderNumberGrid();
@@ -375,6 +376,7 @@ function hitungSkorSementara() {
   return pgScore;
 }
 
+// FIX UTAMA: Menggunakan Image Beacon / POST fallback agar tembus CORS Apps Script
 function kirimProgressKeServer(isSelesai) {
   if (!currentUser) return;
 
@@ -395,6 +397,7 @@ function kirimProgressKeServer(isSelesai) {
     selesai: isSelesai
   };
 
+  // Menggunakan fetch POST dengan mode no-cors
   fetch(GOOGLE_SCRIPT_URL, {
     method: "POST",
     mode: "no-cors",

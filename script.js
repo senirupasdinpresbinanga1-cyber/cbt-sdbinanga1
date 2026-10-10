@@ -1,5 +1,5 @@
 // URL APPS SCRIPT WEB APP
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbymncRJQA5R4bFPRo7o3x2vKJbzKKI7HYA5O8Kt0p0FVXIjZHBkZQd3tHt3XBS_4woa4Q/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwZSJyQ6g6zioshADN5T9dJdDyrnhUv2YzwvlsuSsHmi_zxFPAkC7AurQfbgvZAQgiq0g/exec";
 
 const validStudents = [
   { nisn: "3140466270", nama: "AIRIN RAHMI ANDINI", kelas: "6B" },
@@ -378,20 +378,15 @@ function hitungSkorSementara() {
 function kirimProgressKeServer(isSelesai) {
   if (!currentUser) return;
 
-  const pgScore = hitungSkorSementara();
-  let essayTextSummary = "";
-  allQuestions.forEach((q, idx) => {
-    if (q.type === "essay") {
-      essayTextSummary += `[Soal ${idx + 1}]: ${userAnswers[idx] || "Kosong"} | `;
-    }
-  });
+  const skorPGAsli = hitungSkorSementara(); // Maksimal 240
+  // Konversi skor ke skala 0 - 100
+  const nilaiSkala100 = Math.round((skorPGAsli / 240) * 100);
 
   const payload = {
     nama: currentUser.nama,
     nisn: currentUser.nisn,
     kelas: currentUser.kelas,
-    skorPG: pgScore,
-    jawabanUraian: essayTextSummary,
+    nilai100: nilaiSkala100,
     selesai: isSelesai
   };
 
